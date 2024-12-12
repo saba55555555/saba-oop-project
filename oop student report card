@@ -1,0 +1,54 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Schoolmang;
+
+import java.io.Serializable;
+
+public class ReportCard implements Serializable {
+    private String studentID;
+    private String examName;
+    private double score;
+    private String grade;
+
+    // Constructor
+    public ReportCard(String studentID, String examName, double score, String grade) {
+        this.studentID = studentID;
+        this.examName = examName;
+        this.score = score;
+        this.grade = grade;
+    }
+
+    // Getters and Setters
+    public String getStudentID() { 
+        return studentID; 
+    }
+    public void setStudentID(String studentID) { 
+     this.studentID = studentID; 
+    }
+    public String getExamName() { 
+        return examName; 
+    }
+    public void setExamName(String examName) {
+        this.examName = examName; 
+    }
+    public double getScore() { 
+        return score;
+    }
+    public void setScore(double score) { 
+        this.score = score; 
+    }
+    public String getGrade() {
+        return grade;
+    }
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    @Override
+    public String toString() {
+        return "ReportCard[StudentID: " + studentID + ", Exam: " + examName + ", Score: " + score + ", Grade: " + grade + "]";
+    }
+}
+
