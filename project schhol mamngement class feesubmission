@@ -1,0 +1,50 @@
+a/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Schoolmang;
+
+
+
+    import java.io.Serializable;
+
+public class FeeSubmission implements Serializable {
+    private String studentID;
+    private double feeAmount;
+    private String paymentStatus;
+
+    // Constructor
+    public FeeSubmission(String studentID, double feeAmount, String paymentStatus) {
+        this.studentID = studentID;
+        this.feeAmount = feeAmount;
+        this.paymentStatus = paymentStatus;
+    }
+
+    // Getters and Setters
+    public String getStudentID() 
+    
+    { return studentID; }
+    public void setStudentID(String studentID) 
+    { 
+     this.studentID = studentID;
+    }
+    public double getFeeAmount() { 
+  return feeAmount; }
+    public void setFeeAmount(double feeAmount) {
+        this.feeAmount = feeAmount;
+    }
+    public String getPaymentStatus() {
+        return paymentStatus; 
+    }
+    public void setPaymentStatus(String paymentStatus) 
+    {
+        this.paymentStatus = paymentStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "FeeSubmission[StudentID: " + studentID + ", Fee: " + feeAmount + ", Status: " + paymentStatus + "]";
+    }
+}
+
+
