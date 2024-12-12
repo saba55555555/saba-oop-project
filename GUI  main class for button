@@ -1,0 +1,115 @@
+package schoolpro;
+
+import Schoolmang.FeeSubmission;
+import Schoolmang.ReportCard;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
+
+public class SchoolManagementSystem {
+    private List<Student> students;  // This line will work after importing List and ArrayList
+    private List<FeeSubmission> feeSubmissions;
+    private List<ReportCard> reportCards;
+
+    public SchoolManagementSystem() {
+        students = new ArrayList<>();
+        feeSubmissions = new ArrayList<>();
+        reportCards = new ArrayList<>();
+    }
+
+    // Add student
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    // Add fee submission
+    public void addFeeSubmission(FeeSubmission feeSubmission) {
+        feeSubmissions.add(feeSubmission);
+    }
+
+    // Add report card
+    public void addReportCard(ReportCard reportCard) {
+        reportCards.add(reportCard);
+    }
+
+    // Save data to file
+    public void saveData() throws IOException {
+        try (ObjectOutputStream studentStream = new ObjectOutputStream(new FileOutputStream("students.dat"));
+             ObjectOutputStream feeStream = new ObjectOutputStream(new FileOutputStream("feeSubmissions.dat"));
+             ObjectOutputStream reportStream = new ObjectOutputStream(new FileOutputStream("reportCards.dat"))) {
+
+            studentStream.writeObject(students);
+            feeStream.writeObject(feeSubmissions);
+            reportStream.writeObject(reportCards);
+        }
+    }
+
+    // Load data from file
+    public void loadData() throws IOException, ClassNotFoundException {
+        try (ObjectInputStream studentStream = new ObjectInputStream(new FileInputStream("students.dat"));
+             ObjectInputStream feeStream = new ObjectInputStream(new FileInputStream("feeSubmissions.dat"));
+             ObjectInputStream reportStream = new ObjectInputStream(new FileInputStream("reportCards.dat"))) {
+
+            students = (List<Student>) studentStream.readObject();
+            feeSubmissions = (List<FeeSubmission>) feeStream.readObject();
+            reportCards = (List<ReportCard>) reportStream.readObject();
+        }
+    }
+
+    // Display all students
+    public void displayStudents() {
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+
+    // Display all fee submissions
+    public void displayFeeSubmissions() {
+        for (FeeSubmission feeSubmission : feeSubmissions) {
+            System.out.println(feeSubmission);
+        }
+    }
+
+    // Display all report cards
+    public void displayReportCards() {
+        for (ReportCard reportCard : reportCards) {
+            System.out.println(reportCard);
+        }
+    }
+
+    public static void main(String[] args) {
+        SchoolManagementSystem system = new SchoolManagementSystem();
+
+        // Add sample data
+        system.addStudent(new Student("S001", "John Doe", 15, "10th Grade"));
+        system.addStudent(new Student("S002", "Jane Smith", 14, "9th Grade"));
+
+        system.addFeeSubmission(new FeeSubmission("S001", 1000.0, "Paid"));
+        system.addFeeSubmission(new FeeSubmission("S002", 1000.0, "Pending"));
+
+        system.addReportCard(new ReportCard("S001", "Math Exam", 85.5, "A"));
+        system.addReportCard(new ReportCard("S002", "Math Exam", 92.0, "A"));
+
+        try {
+            // Save data to files
+            system.saveData();
+            System.out.println("Data saved to files.");
+
+            // Load data from files
+            system.loadData();
+            System.out.println("Data loaded from files.");
+
+            // Display all students
+            system.displayStudents();
+
+            // Display all fee submissions
+            system.displayFeeSubmissions();
+
+            // Display all report cards
+            system.displayReportCards();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
